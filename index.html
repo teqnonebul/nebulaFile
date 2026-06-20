@@ -236,30 +236,88 @@
     </footer>
 
     <script>
-        // Navbar glass effect on scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+        (function () {
+            'use strict';
 
-        // Simple reveal animation
-        const reveal = () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
+            // Navbar glass effect on scroll
+            var navbar = document.getElementById('navbar');
+            if (navbar) {
+                window.addEventListener('scroll', function () {
+                    try {
+                        if (window.scrollY > 50) {
+                            navbar.classList.add('scrolled');
+                        } else {
+                            navbar.classList.remove('scrolled');
+                        }
+                    } catch (err) {
+                        console.error('[nebulaFile] Navbar scroll handler error:', err);
+                    }
+                });
+            } else {
+                console.warn('[nebulaFile] Navbar element (#navbar) not found.');
+            }
+
+            // Scroll-reveal animation
+            function reveal() {
+                try {
+                    var reveals = document.querySelectorAll('.reveal');
+                    for (var i = 0; i < reveals.length; i++) {
+                        var el = reveals[i];
+                        var elementTop = el.getBoundingClientRect().top;
+                        if (elementTop < window.innerHeight - 100) {
+                            el.classList.add('active');
+                        }
+                    }
+                } catch (err) {
+                    console.error('[nebulaFile] Reveal animation error:', err);
                 }
-            });
-        };
-        window.addEventListener('scroll', reveal);
-        window.addEventListener('load', reveal);
+            }
+            window.addEventListener('scroll', reveal);
+            window.addEventListener('load', reveal);
+
+            // Slideshow rotation
+            var slideshowContainer = document.querySelector('.slideshow-container');
+            if (slideshowContainer) {
+                var slides = slideshowContainer.querySelectorAll('.slideshow-img');
+                if (slides.length > 1) {
+                    var currentSlide = 0;
+                    for (var i = 1; i < slides.length; i++) {
+                        slides[i].style.opacity = '0';
+                    }
+                    setInterval(function () {
+                        try {
+                            slides[currentSlide].style.opacity = '0';
+                            currentSlide = (currentSlide + 1) % slides.length;
+                            slides[currentSlide].style.opacity = '1';
+                        } catch (err) {
+                            console.error('[nebulaFile] Slideshow rotation error:', err);
+                        }
+                    }, 3000);
+                }
+            }
+
+            // Image error handling
+            var images = document.querySelectorAll('img');
+            for (var i = 0; i < images.length; i++) {
+                images[i].addEventListener('error', function () {
+                    console.warn('[nebulaFile] Failed to load image:', this.src);
+                    this.alt = this.alt || 'Image failed to load';
+                    this.style.opacity = '0.3';
+                });
+            }
+
+            // Video error handling
+            var videos = document.querySelectorAll('video');
+            for (var i = 0; i < videos.length; i++) {
+                videos[i].addEventListener('error', function () {
+                    console.error('[nebulaFile] Video load error:', this.src);
+                    var msg = document.createElement('p');
+                    msg.textContent = 'Video could not be loaded.';
+                    msg.style.cssText = 'color:#f87171;text-align:center;padding:20px;';
+                    this.parentNode.insertBefore(msg, this.nextSibling);
+                });
+            }
+        })();
     </script>
 </body>
 
