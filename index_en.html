@@ -8,6 +8,12 @@
     <meta name="description"
         content="Next-Gen File Manager with Built-in Video Player. Instant preview for PSD/AI, ProRes 4444 Alpha playback, JKL shuttle control. Accelerate your creative workflow.">
 
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,7 +235,7 @@
                 Supports Windows 10 / 11. Free 7-day trial available.
             </p>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <a href="https://nebla-tq.itch.io/nebulafile" class="btn btn-primary" target="_blank">
+                <a href="https://nebla-tq.itch.io/nebulafile" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                     <span class="material-symbols-outlined">shopping_bag</span>
                     Buy on itch.io
                 </a>
