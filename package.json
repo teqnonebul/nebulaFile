@@ -1,0 +1,14 @@
+{
+  "name": "nebulafile",
+  "version": "1.0.0",
+  "description": "Next-gen file manager for creators",
+  "private": true,
+  "scripts": {
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage --verbose"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

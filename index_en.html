@@ -253,31 +253,11 @@
         </div>
     </footer>
 
+    <script src="js/navbar.js"></script>
+    <script src="js/reveal.js"></script>
     <script>
-        // Navbar glass effect on scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Simple reveal animation
-        const reveal = () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
-                }
-            });
-        };
-        window.addEventListener('scroll', reveal);
-        window.addEventListener('load', reveal);
+        initNavbarScroll(document.getElementById('navbar'));
+        initReveal();
     </script>
 </body>
 
